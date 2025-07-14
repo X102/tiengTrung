@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học Tiếng Trung - Công Cụ Hỗ Trợ Toàn Diện</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(to right, #d32f2f, #b71c1c);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><text x="50%" y="50%" font-size="24" text-anchor="middle" fill="white">中文</text></svg>');
+            background-repeat: repeat;
+            z-index: 0;
+        }
+        
+        header .content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .input-section {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .output-section {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: #d32f2f;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+        }
+        
+        .upload-area {
+            border: 2px dashed #d32f2f;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 25px;
+            background: #fff9f9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .upload-area:hover {
+            background: #ffebee;
+            transform: translateY(-3px);
+        }
+        
+        .upload-area i {
+            font-size: 3rem;
+            color: #d32f2f;
+            margin-bottom: 15px;
+        }
+        
+        .upload-area h3 {
+            margin-bottom: 10px;
+            color: #d32f2f;
+        }
+        
+        .text-input {
+            width: 100%;
+            min-height: 180px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            resize: vertical;
+            margin-bottom: 20px;
+            background: #f9f9f9;
+        }
+        
+        .text-input:focus {
+            outline: none;
+            border-color: #d32f2f;
+            box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.2);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, #d32f2f, #b71c1c);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(to right, #b71c1c, #9c0b0b);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+        
+        .options-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .option-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background: #f9f9f9;
+            border-radius: 6px;
+        }
+        
+        .option-item input {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .output-display {
+            min-height: 300px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            background: #fafafa;
+            line-height: 2;
+            font-size: 1.2rem;
+        }
+        
+        .chinese-char {
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+            padding: 0 2px;
+            transition: all 0.2s ease;
+            margin: 0 2px;
+        }
+        
+        .chinese-char:hover {
+            background: #ffebee;
+            border-radius: 4px;
+        }
+        
+        .pinyin {
+            display: block;
+            font-size: 0.9rem;
+            color: #d32f2f;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-top: -5px;
+        }
+        
+        .dictionary-popup {
+            position: fixed;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            z-index: 1000;
+            max-width: 400px;
+            display: none;
+            border: 2px solid #d32f2f;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .dictionary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .dictionary-title {
+            font-size: 1.4rem;
+            color: #d32f2f;
+            font-weight: 700;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .dictionary-content {
+            margin-bottom: 20px;
+        }
+        
+        .char-display {
+            font-size: 3.5rem;
+            text-align: center;
+            margin: 15px 0;
+            color: #333;
+        }
+        
+        .char-info {
+            margin: 15px 0;
+        }
+        
+        .info-row {
+            display: flex;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            min-width: 120px;
+            color: #d32f2f;
+        }
+        
+        .info-value {
+            flex: 1;
+        }
+        
+        .dictionary-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .action-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #f0f0f0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+        }
+        
+        .action-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+        
+        .action-btn.primary {
+            background: linear-gradient(to right, #d32f2f, #b71c1c);
+            color: white;
+        }
+        
+        .grammar-explanation {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 4px solid #d32f2f;
+        }
+        
+        .grammar-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #d32f2f;
+        }
+        
+        .translation-box {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .translation-box h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+        }
+        
+        .api-status {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background: #e3f2fd;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .api-status i {
+            margin-right: 10px;
+            color: #2196f3;
+            font-size: 1.2rem;
+        }
+        
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .processing {
+            background: linear-gradient(to right, #4a148c, #7b1fa2);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 15px 0;
+            display: none;
+        }
+        
+        .file-name {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .char-detail {
+            margin-top: 5px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        @media (max-width: 900px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="content">
+                <h1><i class="fas fa-dragon"></i> HỌC TIẾNG TRUNG THÔNG MINH</h1>
+                <p>Công cụ hỗ trợ toàn diện cho việc học tiếng Trung - Tích hợp DeepSeek API</p>
+            </div>
+        </header>
+        
+        <div class="api-status">
+            <i class="fas fa-plug"></i>
+            <span>DeepSeek API: <span id="apiStatus">Đã kết nối</span></span>
+        </div>
+        
+        <div class="main-content">
+            <div class="input-section">
+                <h2 class="section-title"><i class="fas fa-upload"></i> Nhập liệu</h2>
+                
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-file-word"></i>
+                    <h3>Tải lên file DOCX</h3>
+                    <p>Kéo thả file vào đây hoặc nhấn để chọn file</p>
+                    <div class="file-name" id="fileName"></div>
+                    <input type="file" id="fileInput" accept=".docx" style="display: none;">
+                </div>
+                
+                <h3 class="section-title"><i class="fas fa-keyboard"></i> Hoặc nhập văn bản</h3>
+                <textarea class="text-input" id="textInput" placeholder="Nhập văn bản tiếng Trung tại đây...">你好！我叫小明。我是越南人。我喜欢学习中文和中国文化。今天天气很好，我想去公园看书。我的中文老师非常友好，她教我们很多有趣的汉字。学习中文虽然不容易，但是很有意思。</textarea>
+                
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="processBtn">
+                        <i class="fas fa-cogs"></i> Xử lý văn bản
+                    </button>
+                    <button class="btn btn-secondary" id="clearBtn">
+                        <i class="fas fa-trash-alt"></i> Xóa nội dung
+                    </button>
+                </div>
+                
+                <h3 class="section-title"><i class="fas fa-sliders-h"></i> Tùy chọn</h3>
+                <div class="options-group">
+                    <div class="option-item">
+                        <input type="checkbox" id="pinyinOption" checked>
+                        <label for="pinyinOption">Hiển thị Pinyin</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="translationOption" checked>
+                        <label for="translationOption">Dịch toàn bộ văn bản</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="grammarOption" checked>
+                        <label for="grammarOption">Giải thích ngữ pháp</label>
+                    </div>
+                    <div class="option-item">
+                        <input type="checkbox" id="colorOption">
+                        <label for="colorOption">Màu sắc theo loại từ</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="output-section">
+                <h2 class="section-title"><i class="fas fa-file-alt"></i> Kết quả phân tích</h2>
+                
+                <div class="processing" id="processingIndicator">
+                    <i class="fas fa-spinner loader"></i> Đang phân tích văn bản với DeepSeek API...
+                </div>
+                
+                <div class="output-display" id="outputDisplay">
+                    <!-- Kết quả sẽ hiển thị ở đây -->
+                </div>
+                
+                <div class="grammar-explanation" id="grammarExplanation">
+                    <div class="grammar-title"><i class="fas fa-lightbulb"></i> Giải thích ngữ pháp</div>
+                    <p id="grammarContent">Văn bản sẽ được phân tích và giải thích ngữ pháp tại đây sau khi xử lý.</p>
+                </div>
+                
+                <div class="translation-box" id="translationBox">
+                    <h4><i class="fas fa-language"></i> Bản dịch tiếng Việt</h4>
+                    <p id="translationContent">Bản dịch sẽ hiển thị tại đây sau khi xử lý.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dictionary-popup" id="dictionaryPopup">
+            <div class="dictionary-header">
+                <div class="dictionary-title">Từ điển Hán Việt</div>
+                <button class="close-btn" id="closePopup">&times;</button>
+            </div>
+            <div class="dictionary-content">
+                <div class="char-display" id="popupChar">字</div>
+                <div class="char-info">
+                    <div class="info-row">
+                        <div class="info-label">Pinyin:</div>
+                        <div class="info-value" id="popupPinyin">zì</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Nghĩa tiếng Việt:</div>
+                        <div class="info-value" id="popupMeaning">chữ, từ</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Bộ thủ:</div>
+                        <div class="info-value" id="popupRadical">宀 (mái nhà)</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Số nét:</div>
+                        <div class="info-value" id="popupStrokes">6 nét</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Cấp độ HSK:</div>
+                        <div class="info-value" id="popupHsk">HSK 1</div>
+                    </div>
+                </div>
+                <div class="dictionary-actions">
+                    <button class="action-btn"><i class="fas fa-volume-up"></i> Phát âm</button>
+                    <button class="action-btn primary"><i class="fas fa-save"></i> Lưu từ</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Công cụ Học Tiếng Trung Thông Minh &copy; 2023 - Tích hợp DeepSeek API để phân tích văn bản</p>
+        </div>
+    </div>
+
+    <script>
+        // DeepSeek API Key (Thay thế bằng API key thực tế của bạn)
+        const DEEPSEEK_API_KEY = "sk-34ffb11539b841a1a736cbce4cc8162a";
+        const DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions";
+        
+        // Hàm gọi DeepSeek API
+        async function callDeepSeekAPI(prompt, systemMessage = "Bạn là một trợ lý học tiếng Trung chuyên nghiệp") {
+            try {
+                const response = await fetch(DEEPSEEK_API_URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${DEEPSEEK_API_KEY}`
+                    },
+                    body: JSON.stringify({
+                        model: "deepseek-chat",
+                        messages: [
+                            { role: "system", content: systemMessage },
+                            { role: "user", content: prompt }
+                        ]
+                    })
+                });
+                
+                const data = await response.json();
+                return data.choices[0].message.content.trim();
+            } catch (error) {
+                console.error("Lỗi khi gọi DeepSeek API:", error);
+                return "Đã xảy ra lỗi khi xử lý yêu cầu. Vui lòng thử lại!";
+            }
+        }
+        
+        // Hàm lấy pinyin cho từng chữ Hán
+        async function getPinyinForText(text) {
+            const prompt = `Hãy cung cấp pinyin cho từng chữ Hán trong văn bản sau, mỗi chữ trên một dòng riêng biệt:\n\n${text}`;
+            const result = await callDeepSeekAPI(prompt, "Bạn là một chuyên gia ngôn ngữ tiếng Trung");
+            return result;
+        }
+        
+        // Hàm dịch văn bản sang tiếng Việt
+        async function translateText(text) {
+            const prompt = `Hãy dịch đoạn văn bản sau sang tiếng Việt:\n\n${text}`;
+            return await callDeepSeekAPI(prompt);
+        }
+        
+        // Hàm giải thích ngữ pháp
+        async function explainGrammar(text) {
+            const prompt = `Hãy phân tích và giải thích ngữ pháp của đoạn văn bản sau:\n\n${text}\n\nHãy trình bày theo dạng danh sách với các điểm ngữ pháp chính.`;
+            return await callDeepSeekAPI(prompt);
+        }
+        
+        // Hàm tra cứu từ điển
+        async function lookupDictionary(char) {
+            const prompt = `Hãy cung cấp thông tin từ điển chi tiết cho chữ Hán: ${char}\n\nThông tin bao gồm:
+            - Pinyin
+            - Nghĩa tiếng Việt
+            - Bộ thủ
+            - Số nét
+            - Cấp độ HSK
+            - Cách viết (stroke order)`;
+            
+            return await callDeepSeekAPI(prompt, "Bạn là một từ điển Hán Việt chuyên sâu");
+        }
+        
+        // Hàm xử lý văn bản với DeepSeek API
+        async function processText() {
+            const textInput = document.getElementById('textInput').value;
+            const showPinyin = document.getElementById('pinyinOption').checked;
+            const showTranslation = document.getElementById('translationOption').checked;
+            const showGrammar = document.getElementById('grammarOption').checked;
+            const outputDisplay = document.getElementById('outputDisplay');
+            
+            // Hiển thị chỉ báo đang xử lý
+            document.getElementById('processingIndicator').style.display = 'block';
+            outputDisplay.innerHTML = "Đang phân tích văn bản...";
+            
+            try {
+                // Xử lý pinyin
+                let pinyinResult = "";
+                if (showPinyin) {
+                    pinyinResult = await getPinyinForText(textInput);
+                }
+                
+                // Hiển thị văn bản với pinyin
+                let processedText = "";
+                const lines = pinyinResult.split('\n');
+                
+                for (let i = 0; i < textInput.length; i++) {
+                    const char = textInput[i];
+                    
+                    if (char.match(/[\u4e00-\u9fff]/)) {
+                        // Ký tự Hán tự
+                        let pinyin = "?";
+                        
+                        // Tìm pinyin tương ứng trong kết quả
+                        for (const line of lines) {
+                            if (line.startsWith(char)) {
+                                pinyin = line.split(' ')[1] || '?';
+                                break;
+                            }
+                        }
+                        
+                        processedText += `<span class="chinese-char" data-char="${char}">${char}`;
+                        if (showPinyin) {
+                            processedText += `<span class="pinyin">${pinyin}</span>`;
+                        }
+                        processedText += '</span>';
+                    } else {
+                        // Các ký tự khác
+                        processedText += char;
+                    }
+                }
+                
+                outputDisplay.innerHTML = processedText;
+                
+                // Thêm sự kiện click cho từng ký tự
+                document.querySelectorAll('.chinese-char').forEach(charElement => {
+                    charElement.addEventListener('click', async function() {
+                        const char = this.getAttribute('data-char');
+                        const charData = await lookupDictionary(char);
+                        showPopup(char, charData);
+                    });
+                });
+                
+                // Dịch văn bản
+                if (showTranslation) {
+                    const translation = await translateText(textInput);
+                    document.getElementById('translationBox').style.display = 'block';
+                    document.getElementById('translationContent').textContent = translation;
+                } else {
+                    document.getElementById('translationBox').style.display = 'none';
+                }
+                
+                // Giải thích ngữ pháp
+                if (showGrammar) {
+                    const grammar = await explainGrammar(textInput);
+                    document.getElementById('grammarExplanation').style.display = 'block';
+                    document.getElementById('grammarContent').innerHTML = grammar.replace(/\n/g, '<br>');
+                } else {
+                    document.getElementById('grammarExplanation').style.display = 'none';
+                }
+                
+            } catch (error) {
+                console.error("Lỗi khi xử lý văn bản:", error);
+                outputDisplay.innerHTML = "Đã xảy ra lỗi khi xử lý văn bản. Vui lòng thử lại!";
+            } finally {
+                // Ẩn chỉ báo đang xử lý
+                document.getElementById('processingIndicator').style.display = 'none';
+            }
+        }
+        
+        // Hàm hiển thị popup từ điển
+        function showPopup(char, charData) {
+            const popup = document.getElementById('dictionaryPopup');
+            
+            document.getElementById('popupChar').textContent = char;
+            
+            // Phân tích dữ liệu từ DeepSeek API
+            const lines = charData.split('\n');
+            let pinyin = "?";
+            let meaning = "Không tìm thấy";
+            let radical = "?";
+            let strokes = "?";
+            let hsk = "?";
+            
+            for (const line of lines) {
+                if (line.includes("Pinyin:")) pinyin = line.split(":")[1].trim();
+                else if (line.includes("Nghĩa tiếng Việt:")) meaning = line.split(":")[1].trim();
+                else if (line.includes("Bộ thủ:")) radical = line.split(":")[1].trim();
+                else if (line.includes("Số nét:")) strokes = line.split(":")[1].trim();
+                else if (line.includes("Cấp độ HSK:")) hsk = line.split(":")[1].trim();
+            }
+            
+            document.getElementById('popupPinyin').textContent = pinyin;
+            document.getElementById('popupMeaning').textContent = meaning;
+            document.getElementById('popupRadical').textContent = radical;
+            document.getElementById('popupStrokes').textContent = strokes;
+            document.getElementById('popupHsk').textContent = hsk;
+            
+            popup.style.display = 'block';
+        }
+        
+        function closePopup() {
+            document.getElementById('dictionaryPopup').style.display = 'none';
+        }
+        
+        // Hàm xử lý file DOCX
+        async function handleDocxUpload(file) {
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const result = await mammoth.extractRawText({ arrayBuffer });
+                document.getElementById('textInput').value = result.value;
+                document.getElementById('fileName').textContent = `Đã tải lên: ${file.name}`;
+            } catch (error) {
+                console.error("Lỗi khi đọc file DOCX:", error);
+                alert("Đã xảy ra lỗi khi đọc file DOCX. Vui lòng thử lại!");
+            }
+        }
+        
+        // Sự kiện khi trang được tải
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sự kiện nút xử lý
+            document.getElementById('processBtn').addEventListener('click', processText);
+            
+            // Sự kiện nút xóa
+            document.getElementById('clearBtn').addEventListener('click', function() {
+                document.getElementById('textInput').value = '';
+                document.getElementById('outputDisplay').innerHTML = '';
+                document.getElementById('grammarContent').textContent = '';
+                document.getElementById('translationContent').textContent = '';
+                document.getElementById('fileName').textContent = '';
+            });
+            
+            // Sự kiện khu vực tải lên
+            document.getElementById('uploadArea').addEventListener('click', function() {
+                document.getElementById('fileInput').click();
+            });
+            
+            // Sự kiện chọn file
+            document.getElementById('fileInput').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file && file.name.endsWith('.docx')) {
+                    handleDocxUpload(file);
+                } else {
+                    alert("Vui lòng chọn file DOCX!");
+                }
+            });
+            
+            // Sự kiện kéo thả file
+            const uploadArea = document.getElementById('uploadArea');
+            uploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                uploadArea.style.background = '#ffebee';
+            });
+            
+            uploadArea.addEventListener('dragleave', function() {
+                uploadArea.style.background = '#fff9f9';
+            });
+            
+            uploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                uploadArea.style.background = '#fff9f9';
+                
+                const file = e.dataTransfer.files[0];
+                if (file && file.name.endsWith('.docx')) {
+                    handleDocxUpload(file);
+                } else {
+                    alert("Vui lòng kéo thả file DOCX!");
+                }
+            });
+            
+            // Sự kiện đóng popup
+            document.getElementById('closePopup').addEventListener('click', closePopup);
+            
+            // Sự kiện khi thay đổi tùy chọn
+            document.querySelectorAll('.option-item input').forEach(input => {
+                input.addEventListener('change', processText);
+            });
+        });
+    </script>
+</body>
+</html>

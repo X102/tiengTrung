@@ -435,8 +435,7 @@
                 <li><a href="https://hvdic.thivien.net/" target="_blank">Từ điển Hán Nôm</a> - Tra cứu Hán tự, Nôm và các từ điển liên quan.</li>
                 <li><a href="https://www.mdbg.net/chinese/dictionary" target="_blank">MDBG Chinese Dictionary</a> - Từ điển Trung-Anh trực tuyến miễn phí.</li>
                 <li><a href="https://www.archchinese.com/" target="_blank">Arch Chinese</a> - Công cụ học Hán tự và luyện viết.</li>
-                <li><a href="https://vtudien.com/trung-viet" target="_blank">Vtudien.com</a> - Từ điên đa ngôn ngữ.</li>
-                <li>* Web này được tặng cho <a href="https://www.facebook.com/kieuoanhdichi" target="_blank">Kiều Oanh</a> - Giáo viên tiếng Trung, du học sinh thạc sĩ tại Trung Quốc.</li>
+                 <li>* Web này được tặng cho <a href="https://www.facebook.com/kieuoanhdichi" target="_blank">Kiều Oanh</a> - Giáo viên tiếng Trung, du học sinh thạc sĩ tại Trung Quốc.</li>
             </ul>
         </div>
 
@@ -454,7 +453,7 @@
                     <a id="hanzii-link" href="#" target="_blank" class="link-button">Tra từ điển Hanzii</a>
                     <a id="mdbg-link" href="#" target="_blank" class="link-button">Tra từ điển MDBG</a>
                     <a id="youglish-link" href="#" target="_blank" class="link-button">Tra YouGlish</a>
-                    <a id="wiktionary-link" href="#" target="_blank" class="link-button">Tra Vtudien</a>
+                    <a id="vtudien-link" href="#" target="_blank" class="link-button">Tra Vtudien</a>
                 </div>
                 <div id="google-translate-result" class="mt-4"></div>
                 <div id="translate-loading-spinner" class="loading-spinner"></div>
@@ -536,7 +535,7 @@
             const hanziiLink = document.getElementById('hanzii-link');
             const mdbgLink = document.getElementById('mdbg-link');
             const youglishLink = document.getElementById('youglish-link');
-            const wiktionaryLink = document.getElementById('wiktionary-link');
+            const vtudienLink = document.getElementById('vtudien-link');
             const googleTranslateResultDiv = document.getElementById('google-translate-result');
             const translateLoadingSpinner = document.getElementById('translate-loading-spinner');
             const aiCustomInput = document.getElementById('ai-custom-input');
@@ -725,7 +724,9 @@
                 hanziiLink.href = `https://hanzii.net/search/word/${encodedWord}?hl=vi`;
                 mdbgLink.href = `https://www.mdbg.net/chinese/dictionary?page=worddict&wdrst=0&wdqb=${encodedWord}`;
                 youglishLink.href = `https://youglish.com/pronounce/${encodedWord}/chinese`;
-                wiktionaryLink.href = `https://vtudien.com/trung-viet/dictionary/nghia-cua-tu-${encodedWord}`;
+                vtudienLink.href = `https://vtudien.com/trung-viet/dictionary/nghia-cua-tu-${encodedWord}`;
+                googleTranslateResultDiv.innerHTML = '';
+                lookupModalOverlay.style.display = 'block';
                 modalContentInner.style.visibility = 'hidden';
                 const rect = event.target.getBoundingClientRect();
                 const modalWidth = modalContentInner.offsetWidth;

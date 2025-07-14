@@ -27,6 +27,19 @@
             width: 100%;
             max-width: 900px;
             overflow: hidden;
+            position: relative; /* Needed for absolute positioning of the image */
+        }
+        .corner-image {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 10;
         }
         .text-content {
             white-space: pre-wrap; /* Preserve whitespace and line breaks */
@@ -251,6 +264,7 @@
 </head>
 <body>
     <div class="container">
+        <img src="https://www.facebook.com/photo/?fbid=3382891692004223&set=a.1380987862194626" alt="Ảnh Kiều Oanh" class="corner-image">
         <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">Học tiếng Trung cùng Dichi</h1>
 
         <!-- Controls Section -->

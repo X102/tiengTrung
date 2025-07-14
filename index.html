@@ -3,834 +3,1350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Học Tiếng Trung - Công Cụ Hỗ Trợ Toàn Diện</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <title>Tiếng Trung Dichi</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
             color: #333;
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        header {
-            text-align: center;
-            padding: 30px 0;
-            background: linear-gradient(to right, #d32f2f, #b71c1c);
-            color: white;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><text x="50%" y="50%" font-size="24" text-anchor="middle" fill="white">中文</text></svg>');
-            background-repeat: repeat;
-            z-index: 0;
-        }
-        
-        header .content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        header h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        
-        header p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-            opacity: 0.9;
-        }
-        
-        .main-content {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-        
-        .input-section {
-            flex: 1;
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        }
-        
-        .output-section {
-            flex: 1;
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        }
-        
-        .section-title {
-            font-size: 1.5rem;
-            color: #d32f2f;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e0e0e0;
-            display: flex;
-            align-items: center;
-        }
-        
-        .section-title i {
-            margin-right: 10px;
-        }
-        
-        .upload-area {
-            border: 2px dashed #d32f2f;
-            border-radius: 8px;
-            padding: 30px;
-            text-align: center;
-            margin-bottom: 25px;
-            background: #fff9f9;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .upload-area:hover {
-            background: #ffebee;
-            transform: translateY(-3px);
-        }
-        
-        .upload-area i {
-            font-size: 3rem;
-            color: #d32f2f;
-            margin-bottom: 15px;
-        }
-        
-        .upload-area h3 {
-            margin-bottom: 10px;
-            color: #d32f2f;
-        }
-        
-        .text-input {
-            width: 100%;
-            min-height: 180px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            resize: vertical;
-            margin-bottom: 20px;
-            background: #f9f9f9;
-        }
-        
-        .text-input:focus {
-            outline: none;
-            border-color: #d32f2f;
-            box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.2);
-        }
-        
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .btn {
-            flex: 1;
-            padding: 14px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
             display: flex;
             justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px_12px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 900px;
+            overflow: hidden;
+        }
+        .text-content {
+            white-space: pre-wrap; /* Preserve whitespace and line breaks */
+            word-wrap: break-word; /* Break long words */
+            line-height: 2.8; /* Increased line-height for pinyin */
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f9fafb;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            min-height: 300px;
+            max-height: 70vh;
+            overflow-y: auto;
+            font-size: 1.25rem;
+        }
+        .word-clickable, .segmented-word ruby {
+            cursor: pointer;
+            padding: 2px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            display: inline-flex; 
+            flex-direction: column-reverse;
             align-items: center;
+            line-height: 1.2;
         }
-        
-        .btn i {
-            margin-right: 8px;
+        .word-clickable:hover, .segmented-word:hover {
+            background-color: #e0e7ff; /* Light blue on hover */
         }
-        
-        .btn-primary {
-            background: linear-gradient(to right, #d32f2f, #b71c1c);
+        .segmented-word {
+            border: 1px solid #d1d5db;
+            margin: 2px;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.0);
+            z-index: 999;
+            display: none;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            max-width: 280px;
+            z-index: 1000;
+            border: 1px solid #e5e7eb;
+            animation: fadeIn 0.2s ease-out;
+            cursor: grab;
+            position: relative;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .button-base {
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .button-base:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .button-base:hover:not(:disabled) {
+             transform: translateY(-1px);
+        }
+        .button-base:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        .button-primary {
+            background-color: #4f46e5;
             color: white;
         }
-        
-        .btn-primary:hover {
-            background: linear-gradient(to right, #b71c1c, #9c0b0b);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        .button-primary:hover:not(:disabled) {
+            background-color: #4338ca;
         }
-        
-        .btn-secondary {
-            background: #f0f0f0;
-            color: #333;
+        .button-secondary {
+            background-color: #6b7280;
+            color: white;
         }
-        
-        .btn-secondary:hover {
-            background: #e0e0e0;
-            transform: translateY(-2px);
+        .button-secondary:hover:not(:disabled) {
+            background-color: #4b5563;
         }
-        
-        .options-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .option-item {
-            display: flex;
-            align-items: center;
-            padding: 8px 12px;
-            background: #f9f9f9;
-            border-radius: 6px;
-        }
-        
-        .option-item input {
-            margin-right: 10px;
-            width: 20px;
-            height: 20px;
-        }
-        
-        .output-display {
-            min-height: 300px;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            padding: 20px;
-            background: #fafafa;
-            line-height: 2;
-            font-size: 1.2rem;
-        }
-        
-        .chinese-char {
-            cursor: pointer;
-            position: relative;
-            display: inline-block;
-            padding: 0 2px;
-            transition: all 0.2s ease;
-            margin: 0 2px;
-        }
-        
-        .chinese-char:hover {
-            background: #ffebee;
-            border-radius: 4px;
-        }
-        
-        .pinyin {
+        .link-button {
             display: block;
+            background-color: #eff6ff;
+            color: #1d4ed8;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.2s ease, color 0.2s ease;
             font-size: 0.9rem;
-            color: #d32f2f;
-            font-weight: 500;
-            letter-spacing: 1px;
-            margin-top: -5px;
         }
-        
-        .dictionary-popup {
-            position: fixed;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 25px;
-            z-index: 1000;
-            max-width: 400px;
+        .link-button:hover {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
             display: none;
-            border: 2px solid #d32f2f;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
-        
-        .dictionary-header {
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 10px;
         }
-        
-        .dictionary-title {
-            font-size: 1.4rem;
-            color: #d32f2f;
-            font-weight: 700;
-        }
-        
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #777;
-        }
-        
-        .dictionary-content {
-            margin-bottom: 20px;
-        }
-        
-        .char-display {
-            font-size: 3.5rem;
-            text-align: center;
-            margin: 15px 0;
+        .section-header h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
             color: #333;
+            margin: 0;
         }
-        
-        .char-info {
-            margin: 15px 0;
-        }
-        
-        .info-row {
-            display: flex;
-            margin-bottom: 12px;
-            font-size: 1.1rem;
-        }
-        
-        .info-label {
-            font-weight: 600;
-            min-width: 120px;
-            color: #d32f2f;
-        }
-        
-        .info-value {
-            flex: 1;
-        }
-        
-        .dictionary-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .action-btn {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            background: #f0f0f0;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-weight: 600;
-        }
-        
-        .action-btn:hover {
-            background: #e0e0e0;
-            transform: translateY(-2px);
-        }
-        
-        .action-btn.primary {
-            background: linear-gradient(to right, #d32f2f, #b71c1c);
-            color: white;
-        }
-        
-        .grammar-explanation {
-            margin-top: 20px;
+        #ai-sentence-section, #ai-related-words-section, #explanation-section, #pinyin-text-section, #full-translation-section, #segmented-text-section, #reference-section, #text-stats-section {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             padding: 20px;
-            background: #f9f9f9;
-            border-radius: 8px;
-            border-left: 4px solid #d32f2f;
-        }
-        
-        .grammar-title {
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: #d32f2f;
-        }
-        
-        .translation-box {
-            background: #e8f5e9;
-            padding: 20px;
-            border-radius: 8px;
             margin-top: 20px;
-            border-left: 4px solid #4caf50;
+            border: 1px solid #e5e7eb;
         }
-        
-        .translation-box h4 {
-            color: #2e7d32;
-            margin-bottom: 10px;
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 20px;
-            color: #777;
-            margin-top: 30px;
-            border-top: 1px solid #eee;
-        }
-        
-        .api-status {
-            display: flex;
-            align-items: center;
-            padding: 10px 15px;
-            background: #e3f2fd;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            border-left: 4px solid #2196f3;
-        }
-        
-        .api-status i {
-            margin-right: 10px;
-            color: #2196f3;
-            font-size: 1.2rem;
-        }
-        
-        .loader {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .processing {
-            background: linear-gradient(to right, #4a148c, #7b1fa2);
-            color: white;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            margin: 15px 0;
-            display: none;
-        }
-        
-        .file-name {
-            font-size: 0.9rem;
-            color: #666;
+        #google-translate-result, #selection-translate-result {
             margin-top: 10px;
-            font-style: italic;
+            padding: 8px;
+            background-color: #f0f4f8;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: #333;
+            border: 1px solid #d1e0ed;
         }
-        
-        .char-detail {
-            margin-top: 5px;
+        .text-selection-popup {
+            max-width: 320px; 
+            padding: 10px;
             font-size: 0.85rem;
-            color: #666;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            border: 1px solid #ccc;
+            background-color: #fff;
+            cursor: grab;
+            position: absolute;
+            z-index: 1001;
         }
-        
-        @media (max-width: 900px) {
-            .main-content {
-                flex-direction: column;
-            }
-            
-            header h1 {
-                font-size: 2.2rem;
-            }
-            
-            .btn-group {
-                flex-direction: column;
-            }
+        .text-selection-popup .button-secondary,
+        .text-selection-popup .button-primary {
+            padding: 6px 10px;
+            font-size: 0.8rem;
+            width: 100%;
+        }
+        .close-button {
+            position: absolute;
+            top: 4px;
+            right: 8px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #9ca3af;
+            cursor: pointer;
+            line-height: 1;
+            padding: 2px;
+        }
+        .close-button:hover {
+            color: #374151;
+        }
+        .tts-controls {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            background-color: #f9fafb;
+        }
+        #tts-progress-container {
+            width: 100%;
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            cursor: pointer;
+            height: 10px;
+        }
+        #tts-progress-bar {
+            height: 100%;
+            background-color: #4f46e5;
+            border-radius: 9999px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        #reference-section ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        #reference-section li {
+            margin-bottom: 0.5rem;
+        }
+        #reference-section a {
+            color: #3b82f6;
+            text-decoration: underline;
+        }
+        #reference-section a:hover {
+            color: #1d4ed8;
+        }
+        ruby rt {
+            font-size: 110%;
+            color: #6b7280;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <div class="content">
-                <h1><i class="fas fa-dragon"></i> HỌC TIẾNG TRUNG THÔNG MINH</h1>
-                <p>Công cụ hỗ trợ toàn diện cho việc học tiếng Trung - Tích hợp DeepSeek API</p>
-            </div>
-        </header>
-        
-        <div class="api-status">
-            <i class="fas fa-plug"></i>
-            <span>DeepSeek API: <span id="apiStatus">Đã kết nối</span></span>
-        </div>
-        
-        <div class="main-content">
-            <div class="input-section">
-                <h2 class="section-title"><i class="fas fa-upload"></i> Nhập liệu</h2>
-                
-                <div class="upload-area" id="uploadArea">
-                    <i class="fas fa-file-word"></i>
-                    <h3>Tải lên file DOCX</h3>
-                    <p>Kéo thả file vào đây hoặc nhấn để chọn file</p>
-                    <div class="file-name" id="fileName"></div>
-                    <input type="file" id="fileInput" accept=".docx" style="display: none;">
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">Học tiếng Trung cùng Dichi</h1>
+
+        <!-- Controls Section -->
+        <div class="space-y-4 mb-4">
+            <!-- Row 1: Data Input -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <!-- File Upload -->
+                <div class="flex items-center space-x-2">
+                    <label for="file-upload" class="button-base button-secondary cursor-pointer">Tải lên tệp tin</label>
+                    <input type="file" id="file-upload" class="hidden" accept=".txt,.docx">
+                    <span id="file-name" class="text-gray-600 text-sm"></span>
                 </div>
-                
-                <h3 class="section-title"><i class="fas fa-keyboard"></i> Hoặc nhập văn bản</h3>
-                <textarea class="text-input" id="textInput" placeholder="Nhập văn bản tiếng Trung tại đây...">你好！我叫小明。我是越南人。我喜欢学习中文和中国文化。今天天气很好，我想去公园看书。我的中文老师非常友好，她教我们很多有趣的汉字。学习中文虽然不容易，但是很有意思。</textarea>
-                
-                <div class="btn-group">
-                    <button class="btn btn-primary" id="processBtn">
-                        <i class="fas fa-cogs"></i> Xử lý văn bản
+            </div>
+            <!-- Row 2: Text Area Input -->
+            <div class="mt-2">
+                <label for="text-input-area" class="block mb-2 text-sm font-medium text-gray-700">Hoặc nhập văn bản trực tiếp:</label>
+                <textarea id="text-input-area" rows="5" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm" placeholder="Dán hoặc gõ văn bản tiếng Trung của bạn vào đây..."></textarea>
+                <button id="process-text-button" class="button-base button-primary mt-2">Xử lý văn bản</button>
+            </div>
+            <!-- Row 3: Tools -->
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+                <button id="pinyin-button" class="button-base button-secondary">Thêm Pinyin</button>
+                <button id="segment-text-button" class="button-base button-secondary">Tách cụm từ (AI)</button>
+                <button id="explain-text-button" class="button-base button-secondary">Giải thích (AI)</button>
+                <button id="translate-full-text-button" class="button-base button-secondary">Dịch toàn bộ văn bản</button>
+            </div>
+             <!-- Row 4: Text-to-Speech Controls -->
+            <div class="tts-controls mt-4 space-y-3">
+                <h3 class="text-lg font-medium text-center">Công cụ đọc thành tiếng</h3>
+                <!-- Player Controls -->
+                <div class="flex items-center gap-4">
+                    <button id="tts-play-pause" class="button-base button-primary flex items-center justify-center w-28">
+                        <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" /></svg>
+                        <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 00-1 1v2a1 1 0 102 0V9a1 1 0 00-1-1zm6 0a1 1 0 00-1 1v2a1 1 0 102 0V9a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
+                        <span id="play-pause-text" class="ml-2">Phát</span>
                     </button>
-                    <button class="btn btn-secondary" id="clearBtn">
-                        <i class="fas fa-trash-alt"></i> Xóa nội dung
-                    </button>
-                </div>
-                
-                <h3 class="section-title"><i class="fas fa-sliders-h"></i> Tùy chọn</h3>
-                <div class="options-group">
-                    <div class="option-item">
-                        <input type="checkbox" id="pinyinOption" checked>
-                        <label for="pinyinOption">Hiển thị Pinyin</label>
-                    </div>
-                    <div class="option-item">
-                        <input type="checkbox" id="translationOption" checked>
-                        <label for="translationOption">Dịch toàn bộ văn bản</label>
-                    </div>
-                    <div class="option-item">
-                        <input type="checkbox" id="grammarOption" checked>
-                        <label for="grammarOption">Giải thích ngữ pháp</label>
-                    </div>
-                    <div class="option-item">
-                        <input type="checkbox" id="colorOption">
-                        <label for="colorOption">Màu sắc theo loại từ</label>
+                    <button id="tts-stop" class="button-base button-secondary">Dừng</button>
+                    <div id="tts-progress-container" class="flex-grow">
+                        <div id="tts-progress-bar"></div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="output-section">
-                <h2 class="section-title"><i class="fas fa-file-alt"></i> Kết quả phân tích</h2>
-                
-                <div class="processing" id="processingIndicator">
-                    <i class="fas fa-spinner loader"></i> Đang phân tích văn bản với DeepSeek API...
-                </div>
-                
-                <div class="output-display" id="outputDisplay">
-                    <!-- Kết quả sẽ hiển thị ở đây -->
-                </div>
-                
-                <div class="grammar-explanation" id="grammarExplanation">
-                    <div class="grammar-title"><i class="fas fa-lightbulb"></i> Giải thích ngữ pháp</div>
-                    <p id="grammarContent">Văn bản sẽ được phân tích và giải thích ngữ pháp tại đây sau khi xử lý.</p>
-                </div>
-                
-                <div class="translation-box" id="translationBox">
-                    <h4><i class="fas fa-language"></i> Bản dịch tiếng Việt</h4>
-                    <p id="translationContent">Bản dịch sẽ hiển thị tại đây sau khi xử lý.</p>
+                <!-- Settings -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <div class="flex items-center space-x-2">
+                        <label for="tts-voice" class="text-sm font-medium">Giọng:</label>
+                        <select id="tts-voice" class="p-2 border border-gray-300 rounded-md shadow-sm text-sm"></select>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <label for="tts-rate" class="text-sm font-medium">Tốc độ:</label>
+                        <input type="range" id="tts-rate" min="0.5" max="2" value="1" step="0.1" class="w-24">
+                        <span id="tts-rate-label" class="text-sm font-mono">1.0x</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <input type="checkbox" id="auto-play-toggle" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                        <label for="auto-play-toggle" class="text-sm font-medium">Tự động phát âm</label>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="dictionary-popup" id="dictionaryPopup">
-            <div class="dictionary-header">
-                <div class="dictionary-title">Từ điển Hán Việt</div>
-                <button class="close-btn" id="closePopup">&times;</button>
+        <div id="main-text-section">
+            <div class="section-header">
+                <h3>Văn bản gốc</h3>
+                <div>
+                    <button id="copy-main-text-button" class="copy-button button-base button-secondary text-xs px-2 py-1 mr-2">Sao chép</button>
+                    <button id="toggle-main-text-button" class="toggle-button button-base button-secondary text-xs px-2 py-1">Thu gọn</button>
+                </div>
             </div>
-            <div class="dictionary-content">
-                <div class="char-display" id="popupChar">字</div>
-                <div class="char-info">
-                    <div class="info-row">
-                        <div class="info-label">Pinyin:</div>
-                        <div class="info-value" id="popupPinyin">zì</div>
-                    </div>
-                    <div class="info-row">
-                        <div class="info-label">Nghĩa tiếng Việt:</div>
-                        <div class="info-value" id="popupMeaning">chữ, từ</div>
-                    </div>
-                    <div class="info-row">
-                        <div class="info-label">Bộ thủ:</div>
-                        <div class="info-value" id="popupRadical">宀 (mái nhà)</div>
-                    </div>
-                    <div class="info-row">
-                        <div class="info-label">Số nét:</div>
-                        <div class="info-value" id="popupStrokes">6 nét</div>
-                    </div>
-                    <div class="info-row">
-                        <div class="info-label">Cấp độ HSK:</div>
-                        <div class="info-value" id="popupHsk">HSK 1</div>
-                    </div>
-                </div>
-                <div class="dictionary-actions">
-                    <button class="action-btn"><i class="fas fa-volume-up"></i> Phát âm</button>
-                    <button class="action-btn primary"><i class="fas fa-save"></i> Lưu từ</button>
-                </div>
+            <div id="text-display" class="text-content">
+                <!-- Text content will be loaded here -->
+                Vui lòng tải lên một tệp tin hoặc nhập văn bản để bắt đầu.
             </div>
         </div>
+
+
+        <!-- Text Stats Section -->
+        <div id="text-stats-section" class="hidden">
+             <h3 class="text-xl font-semibold mb-3 text-gray-800">Thống kê văn bản</h3>
+             <p class="text-sm text-gray-600">Độ dài văn bản: <span id="char-count" class="font-bold">0</span> ký tự</p>
+             <p class="text-sm text-gray-600">Số từ (ước tính): <span id="word-count" class="font-bold">0</span> từ</p>
+        </div>
+
+        <!-- AI Generation Section -->
+        <div class="mt-8">
+            <h3 class="text-xl font-semibold mb-3 text-gray-800 text-center">Công cụ AI</h3>
+            <div class="flex items-center gap-2">
+                <input type="text" id="ai-custom-input" placeholder="Nhập từ hoặc cụm từ..." class="p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 text-sm w-full">
+            </div>
+             <div class="flex items-center justify-center gap-2 mt-2">
+                <button id="ai-generate-sentence-button" class="button-base button-primary">Tạo câu ví dụ</button>
+                <button id="ai-generate-related-words-button" class="button-base button-primary">Tạo từ liên quan</button>
+            </div>
+             <div id="loading-spinner" class="loading-spinner"></div>
+            <div id="ai-sentence-results-section" class="mt-4 p-3 bg-gray-50 border border-gray-200 rounded-md text-gray-700 hidden">
+                <div class="section-header">
+                    <h3>Câu ví dụ</h3>
+                    <div>
+                        <button class="copy-button button-base button-secondary text-xs px-2 py-1 mr-2">Sao chép</button>
+                        <button class="toggle-button button-base button-secondary text-xs px-2 py-1">Thu gọn</button>
+                    </div>
+                </div>
+                <div id="ai-sentence-content" class="section-content text-left"></div>
+            </div>
+             <div id="ai-related-words-results-section" class="mt-4 p-3 bg-gray-50 border border-gray-200 rounded-md text-gray-700 hidden">
+                <div class="section-header">
+                    <h3>Từ liên quan</h3>
+                    <div>
+                        <button class="copy-button button-base button-secondary text-xs px-2 py-1 mr-2">Sao chép</button>
+                        <button class="toggle-button button-base button-secondary text-xs px-2 py-1">Thu gọn</button>
+                    </div>
+                </div>
+                <div id="ai-related-words-content" class="section-content text-left"></div>
+            </div>
+        </div>
+
+        <!-- Chunk Processing Controls -->
+        <div id="chunk-processing-controls" class="mt-4 p-3 bg-yellow-100 border border-yellow-300 rounded-md hidden">
+            <p id="chunk-status" class="text-sm text-yellow-800 mb-2"></p>
+            <div class="flex items-center justify-center gap-2">
+                <button id="process-pause-resume" class="button-base button-primary text-xs">Tạm dừng</button>
+                <button id="process-stop" class="button-base button-secondary text-xs">Dừng</button>
+            </div>
+        </div>
+
+        <!-- Pinyin Text Section -->
+        <div id="pinyin-text-section" class="mt-8 hidden">
+            <div class="section-header">
+                <h3>Văn bản với Pinyin (AI)</h3>
+                 <div>
+                    <button class="copy-button button-base button-secondary text-xs px-2 py-1 mr-2">Sao chép</button>
+                    <button class="toggle-button button-base button-secondary text-xs px-2 py-1">Thu gọn</button>
+                </div>
+            </div>
+            <div id="pinyin-content" class="text-gray-700 text-content section-content"></div>
+            <div id="pinyin-loading-spinner" class="loading-spinner"></div>
+        </div>
+
+        <!-- Segmented Text Section -->
+        <div id="segmented-text-section" class="mt-8 hidden">
+            <div class="section-header">
+                <h3>Văn bản theo cụm từ (AI)</h3>
+                 <div>
+                    <button class="copy-button button-base button-secondary text-xs px-2 py-1 mr-2">Sao chép</button>
+                    <button class="toggle-button button-base button-secondary text-xs px-2 py-1">Thu gọn</button>
+                </div>
+            </div>
+            <div id="segmented-content" class="text-gray-700 text-content section-content" style="line-height: 2.5;"></div>
+            <div id="segment-loading-spinner" class="loading-spinner"></div>
+        </div>
         
-        <div class="footer">
-            <p>Công cụ Học Tiếng Trung Thông Minh &copy; 2023 - Tích hợp DeepSeek API để phân tích văn bản</p>
+        <!-- Full Translation Section -->
+        <div id="full-translation-section" class="mt-8 hidden">
+            <div class="section-header">
+                <h3>Bản dịch (AI)</h3>
+                 <div>
+                    <button class="copy-button button-base button-secondary text-xs px-2 py-1 mr-2">Sao chép</button>
+                    <button class="toggle-button button-base button-secondary text-xs px-2 py-1">Thu gọn</button>
+                </div>
+            </div>
+            <div id="full-translation-content" class="text-gray-700 text-content section-content"></div>
+            <div id="full-translation-loading-spinner" class="loading-spinner"></div>
+        </div>
+
+        <!-- AI Explanation Section -->
+        <div id="explanation-section" class="mt-8 hidden">
+            <div class="section-header">
+                <h3>Giải thích nội dung văn bản (AI)</h3>
+                 <div>
+                    <button class="copy-button button-base button-secondary text-xs px-2 py-1 mr-2">Sao chép</button>
+                    <button class="toggle-button button-base button-secondary text-xs px-2 py-1">Thu gọn</button>
+                </div>
+            </div>
+            <div id="explanation-content" class="text-gray-700 section-content"></div>
+            <div id="explanation-loading-spinner" class="loading-spinner"></div>
+        </div>
+
+        <!-- Reference Section -->
+        <div id="reference-section">
+            <h3 class="text-xl font-semibold mb-3 text-gray-800">Trang web tham khảo</h3>
+            <ul>
+                <li><a href="https://hanzii.net/" target="_blank">Hanzii.net</a> - Từ điển và công cụ học tiếng Trung toàn diện cho người Việt.</li>
+                <li><a href="https://hvdic.thivien.net/" target="_blank">Từ điển Hán Nôm</a> - Tra cứu Hán tự, Nôm và các từ điển liên quan.</li>
+                <li><a href="https://www.mdbg.net/chinese/dictionary" target="_blank">MDBG Chinese Dictionary</a> - Từ điển Trung-Anh trực tuyến miễn phí.</li>
+                <li><a href="https://www.archchinese.com/" target="_blank">Arch Chinese</a> - Công cụ học Hán tự và luyện viết.</li>
+                <li><a href="https://vtudien.com/trung-viet" target="_blank">Vtudien.com</a> - Từ điên đa ngôn ngữ.</li>
+                <li>* Web này được tặng cho <a href="https://www.facebook.com/kieuoanhdichi" target="_blank">Kiều Oanh</a> - Giáo viên tiếng Trung, du học sinh thạc sĩ tại Trung Quốc.</li>
+            </ul>
+        </div>
+
+
+        <!-- Word Lookup Modal -->
+        <div id="lookup-modal" class="modal-overlay">
+            <div id="modal-content-inner" class="modal-content">
+                <button id="close-lookup-modal" class="close-button" title="Đóng">&times;</button>
+                <h2 class="text-xl font-semibold mb-3 text-gray-800">Tra cứu từ: <span id="selected-word-modal" class="font-bold text-indigo-600"></span></h2>
+                <div class="flex items-center gap-2 mt-2 mb-3">
+                    <button id="pronounce-word-button" class="button-base button-primary flex-1">Phát âm</button>
+                    <button id="copy-word-button" class="button-base button-secondary flex-1">Sao chép</button>
+                </div>
+                <div class="space-y-2">
+                    <a id="hanzii-link" href="#" target="_blank" class="link-button">Tra từ điển Hanzii</a>
+                    <a id="mdbg-link" href="#" target="_blank" class="link-button">Tra từ điển MDBG</a>
+                    <a id="youglish-link" href="#" target="_blank" class="link-button">Tra YouGlish</a>
+                    <a id="wiktionary-link" href="#" target="_blank" class="link-button">Tra Vtudien</a>
+                </div>
+                <div id="google-translate-result" class="mt-4"></div>
+                <div id="translate-loading-spinner" class="loading-spinner"></div>
+            </div>
+        </div>
+
+        <!-- Text Selection Popup -->
+        <div id="selection-popup" class="modal-content text-selection-popup hidden">
+            <button id="close-selection-popup" class="close-button" title="Đóng">&times;</button>
+            <div class="flex flex-col space-y-2">
+                <button id="copy-selection-button" class="button-base button-secondary w-full">Sao chép</button>
+                <button id="translate-selection-button" class="button-base button-primary w-full">Dịch</button>
+                <button id="pronounce-selection-button" class="button-base button-primary w-full">Phát âm</button>
+                <a id="hanzii-selection-link" href="#" target="_blank" class="link-button">Tra Hanzii</a>
+            </div>
+            <div id="selection-translate-result" class="mt-2 p-2 bg-gray-50 border border-gray-200 rounded-md text-gray-700 text-sm hidden"></div>
+            <div id="selection-translate-spinner" class="loading-spinner"></div>
         </div>
     </div>
 
+    <!-- External libraries moved to the end of body -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.5.1/mammoth.browser.min.js"></script>
+    
+    <!-- Firebase SDK Compat libraries for global access -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+
+    <!-- Main App Logic -->
     <script>
-        // DeepSeek API Key (Thay thế bằng API key thực tế của bạn)
-        const DEEPSEEK_API_KEY = "sk-34ffb11539b841a1a736cbce4cc8162a";
-        const DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions";
-        
-        // Hàm gọi DeepSeek API
-        async function callDeepSeekAPI(prompt, systemMessage = "Bạn là một trợ lý học tiếng Trung chuyên nghiệp") {
-            try {
-                const response = await fetch(DEEPSEEK_API_URL, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${DEEPSEEK_API_KEY}`
-                    },
-                    body: JSON.stringify({
-                        model: "deepseek-chat",
-                        messages: [
-                            { role: "system", content: systemMessage },
-                            { role: "user", content: prompt }
-                        ]
-                    })
+        // --- Application Logic ---
+        function mainApp() {
+            // Global variables for Firebase (MANDATORY)
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+            const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+    
+            let auth;
+            let db;
+            let userId = null;
+            let isAuthReady = false;
+    
+            // Initialize Firebase
+            if (Object.keys(firebaseConfig).length > 0 && typeof firebase !== 'undefined') {
+                firebase.initializeApp(firebaseConfig);
+                auth = firebase.auth();
+                db = firebase.firestore();
+    
+                // Listen for auth state changes
+                auth.onAuthStateChanged(async (user) => {
+                    if (user) {
+                        userId = user.uid;
+                    } else {
+                        try {
+                            if (initialAuthToken) {
+                                await auth.signInWithCustomToken(initialAuthToken);
+                            } else {
+                                await auth.signInAnonymously();
+                            }
+                            userId = auth.currentUser?.uid || crypto.randomUUID();
+                        } catch (error) {
+                            console.error("Firebase authentication error:", error);
+                        }
+                    }
+                    isAuthReady = true;
                 });
-                
-                const data = await response.json();
-                return data.choices[0].message.content.trim();
-            } catch (error) {
-                console.error("Lỗi khi gọi DeepSeek API:", error);
-                return "Đã xảy ra lỗi khi xử lý yêu cầu. Vui lòng thử lại!";
+            } else {
+                console.warn("Firebase config not found or Firebase library not loaded. Firebase services will not be available.");
+                isAuthReady = true;
+                userId = crypto.randomUUID();
             }
-        }
-        
-        // Hàm lấy pinyin cho từng chữ Hán
-        async function getPinyinForText(text) {
-            const prompt = `Hãy cung cấp pinyin cho từng chữ Hán trong văn bản sau, mỗi chữ trên một dòng riêng biệt:\n\n${text}`;
-            const result = await callDeepSeekAPI(prompt, "Bạn là một chuyên gia ngôn ngữ tiếng Trung");
-            return result;
-        }
-        
-        // Hàm dịch văn bản sang tiếng Việt
-        async function translateText(text) {
-            const prompt = `Hãy dịch đoạn văn bản sau sang tiếng Việt:\n\n${text}`;
-            return await callDeepSeekAPI(prompt);
-        }
-        
-        // Hàm giải thích ngữ pháp
-        async function explainGrammar(text) {
-            const prompt = `Hãy phân tích và giải thích ngữ pháp của đoạn văn bản sau:\n\n${text}\n\nHãy trình bày theo dạng danh sách với các điểm ngữ pháp chính.`;
-            return await callDeepSeekAPI(prompt);
-        }
-        
-        // Hàm tra cứu từ điển
-        async function lookupDictionary(char) {
-            const prompt = `Hãy cung cấp thông tin từ điển chi tiết cho chữ Hán: ${char}\n\nThông tin bao gồm:
-            - Pinyin
-            - Nghĩa tiếng Việt
-            - Bộ thủ
-            - Số nét
-            - Cấp độ HSK
-            - Cách viết (stroke order)`;
+
+            const textDisplay = document.getElementById('text-display');
+            const pinyinButton = document.getElementById('pinyin-button');
+            const explainTextButton = document.getElementById('explain-text-button');
+            const lookupModalOverlay = document.getElementById('lookup-modal');
+            const modalContentInner = document.getElementById('modal-content-inner');
+            const selectedWordModalSpan = document.getElementById('selected-word-modal');
+            const hanziiLink = document.getElementById('hanzii-link');
+            const mdbgLink = document.getElementById('mdbg-link');
+            const youglishLink = document.getElementById('youglish-link');
+            const wiktionaryLink = document.getElementById('wiktionary-link');
+            const googleTranslateResultDiv = document.getElementById('google-translate-result');
+            const translateLoadingSpinner = document.getElementById('translate-loading-spinner');
+            const aiCustomInput = document.getElementById('ai-custom-input');
+            const aiGenerateSentenceButton = document.getElementById('ai-generate-sentence-button');
+            const aiGenerateRelatedWordsButton = document.getElementById('ai-generate-related-words-button');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const aiSentenceResultsSection = document.getElementById('ai-sentence-results-section');
+            const aiRelatedWordsResultsSection = document.getElementById('ai-related-words-results-section');
+            const aiSentenceContent = document.getElementById('ai-sentence-content');
+            const aiRelatedWordsContent = document.getElementById('ai-related-words-content');
+            const explanationSection = document.getElementById('explanation-section');
+            const explanationContentDiv = document.getElementById('explanation-content');
+            const explanationLoadingSpinner = document.getElementById('explanation-loading-spinner');
+            const pinyinTextSection = document.getElementById('pinyin-text-section');
+            const pinyinContentDiv = document.getElementById('pinyin-content');
+            const pinyinLoadingSpinner = document.getElementById('pinyin-loading-spinner');
+            const fullTranslationSection = document.getElementById('full-translation-section');
+            const fullTranslationContent = document.getElementById('full-translation-content');
+            const fullTranslationLoadingSpinner = document.getElementById('full-translation-loading-spinner');
+            const translateFullTextButton = document.getElementById('translate-full-text-button');
+            const segmentTextButton = document.getElementById('segment-text-button');
+            const segmentedTextSection = document.getElementById('segmented-text-section');
+            const segmentedContentDiv = document.getElementById('segmented-content');
+            const segmentLoadingSpinner = document.getElementById('segment-loading-spinner');
+            const fileUploadInput = document.getElementById('file-upload');
+            const fileNameSpan = document.getElementById('file-name');
+            const selectionPopup = document.getElementById('selection-popup');
+            const copySelectionButton = document.getElementById('copy-selection-button');
+            const translateSelectionButton = document.getElementById('translate-selection-button');
+            const selectionTranslateResultDiv = document.getElementById('selection-translate-result');
+            const selectionTranslateSpinner = document.getElementById('selection-translate-spinner');
+            const closeLookupModalBtn = document.getElementById('close-lookup-modal');
+            const closeSelectionPopupBtn = document.getElementById('close-selection-popup');
+            const textInputArea = document.getElementById('text-input-area');
+            const processTextButton = document.getElementById('process-text-button');
+            const textStatsSection = document.getElementById('text-stats-section');
+            const charCountSpan = document.getElementById('char-count');
+            const wordCountSpan = document.getElementById('word-count');
+            const copyMainTextButton = document.getElementById('copy-main-text-button');
+            const toggleMainTextButton = document.getElementById('toggle-main-text-button');
+            const pronounceWordButton = document.getElementById('pronounce-word-button');
+            const copyWordButton = document.getElementById('copy-word-button');
+            const pronounceSelectionButton = document.getElementById('pronounce-selection-button');
+            const hanziiSelectionLink = document.getElementById('hanzii-selection-link');
             
-            return await callDeepSeekAPI(prompt, "Bạn là một từ điển Hán Việt chuyên sâu");
-        }
-        
-        // Hàm xử lý văn bản với DeepSeek API
-        async function processText() {
-            const textInput = document.getElementById('textInput').value;
-            const showPinyin = document.getElementById('pinyinOption').checked;
-            const showTranslation = document.getElementById('translationOption').checked;
-            const showGrammar = document.getElementById('grammarOption').checked;
-            const outputDisplay = document.getElementById('outputDisplay');
+            // TTS Controls
+            const ttsPlayPauseBtn = document.getElementById('tts-play-pause');
+            const playIcon = document.getElementById('play-icon');
+            const pauseIcon = document.getElementById('pause-icon');
+            const playPauseText = document.getElementById('play-pause-text');
+            const ttsStopBtn = document.getElementById('tts-stop');
+            const ttsVoiceSelect = document.getElementById('tts-voice');
+            const ttsRateSlider = document.getElementById('tts-rate');
+            const ttsRateLabel = document.getElementById('tts-rate-label');
+            const ttsProgressContainer = document.getElementById('tts-progress-container');
+            const ttsProgressBar = document.getElementById('tts-progress-bar');
+            const autoPlayToggle = document.getElementById('auto-play-toggle');
             
-            // Hiển thị chỉ báo đang xử lý
-            document.getElementById('processingIndicator').style.display = 'block';
-            outputDisplay.innerHTML = "Đang phân tích văn bản...";
+            // Chunk Processing Controls
+            const chunkControls = document.getElementById('chunk-processing-controls');
+            const chunkStatus = document.getElementById('chunk-status');
+            const processPauseResumeBtn = document.getElementById('process-pause-resume');
+            const processStopBtn = document.getElementById('process-stop');
+
+            let currentRawText = '';
+            let justEndedDrag = false;
+            let voices = [];
+            let speechStartIndex = 0;
             
-            try {
-                // Xử lý pinyin
-                let pinyinResult = "";
-                if (showPinyin) {
-                    pinyinResult = await getPinyinForText(textInput);
+            // Chunk processing state
+            let isProcessingChunks = false;
+            let isPaused = false;
+            let processingQueue = [];
+            let currentChunkIndex = 0;
+            let currentProcessFunction = null;
+            let currentResultContainer = null;
+            let currentLoadingSpinner = null;
+
+            function makeDraggable(element) {
+                let isDragging = false;
+                let initialMouseX, initialMouseY, initialElementLeft, initialElementTop;
+
+                element.addEventListener("mousedown", dragStart);
+
+                function dragStart(e) {
+                    if (e.target.closest('a, button, .close-button')) return;
+                    isDragging = true;
+                    element.style.cursor = 'grabbing';
+                    element.style.zIndex = 1001;
+                    const rect = element.getBoundingClientRect();
+                    initialElementLeft = rect.left;
+                    initialElementTop = rect.top;
+                    initialMouseX = e.clientX;
+                    initialMouseY = e.clientY;
+                    e.preventDefault();
+                    e.stopPropagation();
+                    justEndedDrag = false;
+                }
+
+                document.addEventListener("mousemove", (e) => {
+                    if (isDragging) {
+                        e.preventDefault();
+                        const dx = e.clientX - initialMouseX;
+                        const dy = e.clientY - initialMouseY;
+                        element.style.left = `${initialElementLeft + dx}px`;
+                        element.style.top = `${initialElementTop + dy}px`;
+                    }
+                });
+
+                document.addEventListener("mouseup", () => {
+                    if (isDragging) {
+                        isDragging = false;
+                        element.style.cursor = 'grab';
+                        element.style.zIndex = 1000;
+                        justEndedDrag = true;
+                        setTimeout(() => { justEndedDrag = false; }, 100);
+                    }
+                });
+            }
+
+            function addClickableSpansTo(element, text) {
+                element.innerHTML = '';
+                const parts = text.split(/([\u4e00-\u9fa5])/g); 
+                parts.forEach(part => {
+                    if (part.match(/[\u4e00-\u9fa5]/)) {
+                        const span = document.createElement('span');
+                        span.textContent = part;
+                        span.className = 'word-clickable';
+                        span.addEventListener('click', (event) => {
+                            event.stopPropagation();
+                            selectionPopup.classList.add('hidden');
+                            openLookupModal(part, event);
+                            aiCustomInput.value = part;
+                            if(autoPlayToggle.checked) {
+                                speakWord(part);
+                            }
+                        });
+                        element.appendChild(span);
+                    } else {
+                        element.appendChild(document.createTextNode(part));
+                    }
+                });
+            }
+
+            function processNewContent(htmlContent, isHtml = false) {
+                speechSynthesis.cancel();
+                stopChunkProcessing();
+
+                if (isHtml) {
+                    textDisplay.innerHTML = htmlContent;
+                    addClickableSpansTo(textDisplay, textDisplay.innerText);
+                    currentRawText = textDisplay.innerText;
+                } else {
+                    currentRawText = htmlContent;
+                    addClickableSpansTo(textDisplay, currentRawText);
+                }
+
+                // Update text stats
+                charCountSpan.textContent = currentRawText.length;
+                wordCountSpan.textContent = currentRawText.split(/[\s\n]+/).filter(Boolean).length;
+                textStatsSection.classList.remove('hidden');
+
+
+                [aiSentenceResultsSection, aiRelatedWordsResultsSection, explanationSection, pinyinTextSection, lookupModalOverlay, selectionPopup, fullTranslationSection, segmentedTextSection].forEach(el => el.classList.add('hidden'));
+            }
+
+            async function getTranslation(word) {
+                translateLoadingSpinner.style.display = 'block';
+                const apiKey = "AIzaSyByK7ww7MRpFmUHJU7Mz70qj6OhjUFYMCg";
+                try {
+                    const prompt = `Cho từ tiếng Trung "${word}", hãy cung cấp phiên âm pinyin và nghĩa tiếng Việt của nó. Trả về kết quả dưới dạng JSON với hai khóa: "pinyin" và "meaning".`;
+                    const schema = { type: "OBJECT", properties: { "pinyin": { "type": "STRING" }, "meaning": { "type": "STRING" } }, required: ["pinyin", "meaning"] };
+                    const jsonString = await callAI(prompt, "application/json", schema);
+                    return JSON.parse(jsonString);
+                } catch (error) {
+                    console.error("Error calling AI for translation:", error);
+                    return { pinyin: 'Lỗi', meaning: `Không thể dịch.` };
+                } finally {
+                    translateLoadingSpinner.style.display = 'none';
+                }
+            }
+
+            async function openLookupModal(word, event) {
+                selectedWordModalSpan.textContent = word;
+                const encodedWord = encodeURIComponent(word);
+                hanziiLink.href = `https://hanzii.net/search/word/${encodedWord}?hl=vi`;
+                mdbgLink.href = `https://www.mdbg.net/chinese/dictionary?page=worddict&wdrst=0&wdqb=${encodedWord}`;
+                youglishLink.href = `https://youglish.com/pronounce/${encodedWord}/chinese`;
+                wiktionaryLink.href = `https://vtudien.com/trung-viet/dictionary/nghia-cua-tu-${encodedWord}`;
+                modalContentInner.style.visibility = 'hidden';
+                const rect = event.target.getBoundingClientRect();
+                const modalWidth = modalContentInner.offsetWidth;
+                const modalHeight = modalContentInner.offsetHeight;
+                const margin = 10;
+                let top = rect.bottom + 5;
+                let left = rect.left;
+                if (left + modalWidth > window.innerWidth - margin) left = window.innerWidth - modalWidth - margin;
+                if (left < margin) left = margin;
+                if (top + modalHeight > window.innerHeight - margin) top = rect.top - modalHeight - 5;
+                if (top < margin) top = margin;
+                modalContentInner.style.left = `${left}px`;
+                modalContentInner.style.top = `${top}px`;
+                modalContentInner.style.visibility = 'visible';
+                
+                pronounceWordButton.onclick = () => speakWord(word);
+                copyWordButton.onclick = () => copyToClipboard(word);
+
+                const translationResult = await getTranslation(word);
+                googleTranslateResultDiv.innerHTML = `<strong>Dịch:</strong> ${translationResult.pinyin} - ${translationResult.meaning}`;
+            }
+
+            makeDraggable(modalContentInner);
+            makeDraggable(selectionPopup);
+
+            document.addEventListener('mousedown', (event) => {
+                if (justEndedDrag) return;
+
+                const clickedInsideLookup = modalContentInner.contains(event.target);
+                const clickedInsideSelection = selectionPopup.contains(event.target);
+                const clickedOnWord = event.target.closest('.word-clickable, .segmented-word');
+
+                if (lookupModalOverlay.style.display === 'block' && !clickedInsideLookup && !clickedOnWord) {
+                    lookupModalOverlay.style.display = 'none';
                 }
                 
-                // Hiển thị văn bản với pinyin
-                let processedText = "";
-                const lines = pinyinResult.split('\n');
-                
-                for (let i = 0; i < textInput.length; i++) {
-                    const char = textInput[i];
-                    
-                    if (char.match(/[\u4e00-\u9fff]/)) {
-                        // Ký tự Hán tự
-                        let pinyin = "?";
-                        
-                        // Tìm pinyin tương ứng trong kết quả
-                        for (const line of lines) {
-                            if (line.startsWith(char)) {
-                                pinyin = line.split(' ')[1] || '?';
-                                break;
-                            }
-                        }
-                        
-                        processedText += `<span class="chinese-char" data-char="${char}">${char}`;
-                        if (showPinyin) {
-                            processedText += `<span class="pinyin">${pinyin}</span>`;
-                        }
-                        processedText += '</span>';
-                    } else {
-                        // Các ký tự khác
-                        processedText += char;
+                if (!selectionPopup.classList.contains('hidden') && !clickedInsideSelection) {
+                    const selection = window.getSelection();
+                    if (selection.toString().length === 0) {
+                        selectionPopup.classList.add('hidden');
                     }
                 }
+            });
+
+            closeLookupModalBtn.addEventListener('click', () => {
+                lookupModalOverlay.style.display = 'none';
+            });
+
+            closeSelectionPopupBtn.addEventListener('click', () => {
+                selectionPopup.classList.add('hidden');
+            });
+
+
+            async function callAI(prompt, responseMimeType, responseSchema) {
+                const apiKey = "AIzaSyByK7ww7MRpFmUHJU7Mz70qj6OhjUFYMCg";
+                const payload = {
+                    contents: [{ role: "user", parts: [{ text: prompt }] }],
+                    generationConfig: { responseMimeType }
+                };
+                if (responseSchema) {
+                    payload.generationConfig.responseSchema = responseSchema;
+                }
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                if (!response.ok) throw new Error(`API error: ${response.status} - ${await response.text()}`);
+                const result = await response.json();
+                if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    return result.candidates[0].content.parts[0].text;
+                }
+                throw new Error("Unexpected AI response structure");
+            }
+
+            async function generateAiContent(button, input, section, contentDiv, promptGenerator, schema, contentRenderer) {
+                const word = input.value.trim();
+                if (!word) {
+                    alert("Vui lòng nhập một từ hoặc cụm từ.");
+                    return;
+                }
+                loadingSpinner.style.display = 'block';
+                section.classList.remove('hidden');
+                contentDiv.innerHTML = '';
+                button.disabled = true;
+                try {
+                    const prompt = promptGenerator(word);
+                    const jsonString = await callAI(prompt, "application/json", schema);
+                    const parsedJson = JSON.parse(jsonString);
+                    contentRenderer(parsedJson, contentDiv);
+                } catch (error) {
+                    contentDiv.innerHTML = `<p class="text-red-600">Lỗi khi gọi AI: ${error.message}. Vui lòng thử lại.</p>`;
+                    console.error("Error calling AI:", error);
+                } finally {
+                    loadingSpinner.style.display = 'none';
+                    button.disabled = false;
+                }
+            }
+
+            aiGenerateSentenceButton.addEventListener('click', () => {
+                const promptGenerator = (word) => `Với từ tiếng Trung "${word}", hãy tạo một mảng JSON chứa 10 đối tượng. Mỗi đối tượng đại diện cho một câu ví dụ và phải có 3 thuộc tính: "sentence" (câu tiếng Trung), "pinyin" (phiên âm Pinyin của câu đó), và "meaning" (nghĩa tiếng Việt của câu đó).`;
+                const schema = {
+                    type: "ARRAY",
+                    items: {
+                        type: "OBJECT",
+                        properties: {
+                            "sentence": { "type": "STRING" },
+                            "pinyin": { "type": "STRING" },
+                            "meaning": { "type": "STRING" }
+                        },
+                        "required": ["sentence", "pinyin", "meaning"]
+                    }
+                };
+                const contentRenderer = (data, element) => {
+                    const sentences = Array.isArray(data) ? data : [];
+                    let htmlContent = '<ul class="list-disc list-inside space-y-2">';
+                    if (sentences.length > 0) {
+                        sentences.forEach(s => {
+                            htmlContent += `<li>
+                                <div class="font-semibold">${s.sentence}</div>
+                                <div class="text-sm text-gray-500">${s.pinyin}</div>
+                                <div class="text-sm text-blue-600">${s.meaning}</div>
+                            </li>`;
+                        });
+                    } else {
+                        htmlContent += '<li>Không có câu ví dụ nào được tạo.</li>';
+                    }
+                    htmlContent += '</ul>';
+                    element.innerHTML = htmlContent;
+                };
+                generateAiContent(aiGenerateSentenceButton, aiCustomInput, aiSentenceResultsSection, aiSentenceContent, promptGenerator, schema, contentRenderer);
+            });
+
+            aiGenerateRelatedWordsButton.addEventListener('click', () => {
+                const promptGenerator = (word) => `Với từ tiếng Trung "${word}", hãy tạo một mảng JSON gồm 20 đối tượng, mỗi đối tượng có thuộc tính "word" (từ tiếng Trung), "pinyin" (phiên âm pinyin), và "meaning" (nghĩa tiếng Việt).`;
+                const schema = {
+                    type: "ARRAY",
+                    items: {
+                        type: "OBJECT",
+                        properties: {
+                            "word": { "type": "STRING" },
+                            "pinyin": { "type": "STRING" },
+                            "meaning": { "type": "STRING" }
+                        },
+                        "required": ["word", "pinyin", "meaning"]
+                    }
+                };
+                const contentRenderer = (data, element) => {
+                    const relatedWords = Array.isArray(data) ? data : [];
+                    let htmlContent = '<ul class="list-disc list-inside space-y-1">';
+                    if (relatedWords.length > 0) {
+                        relatedWords.forEach(relWord => { htmlContent += `<li><strong>${relWord.word}</strong> (${relWord.pinyin}): ${relWord.meaning}</li>`; });
+                    } else {
+                        htmlContent += '<li>Không có từ liên quan nào được tạo.</li>';
+                    }
+                    htmlContent += '</ul>';
+                    element.innerHTML = htmlContent;
+                };
+                generateAiContent(aiGenerateRelatedWordsButton, aiCustomInput, aiRelatedWordsResultsSection, aiRelatedWordsContent, promptGenerator, schema, contentRenderer);
+            });
+            
+            function chunkText(text, maxSize) {
+                const chunks = [];
+                if (!text) return chunks;
+                const sentences = text.match(/[^。！？\n\r]+[。！？\n\r]?/g) || [text];
+                let currentChunk = '';
+                for (const sentence of sentences) {
+                    if (currentChunk.length + sentence.length > maxSize && currentChunk.length > 0) {
+                        chunks.push(currentChunk);
+                        currentChunk = sentence;
+                    } else {
+                        currentChunk += sentence;
+                    }
+                }
+                if (currentChunk) chunks.push(currentChunk);
+                return chunks.filter(c => c.trim() !== '');
+            }
+
+            function stopChunkProcessing() {
+                isProcessingChunks = false;
+                isPaused = false;
+                chunkControls.classList.add('hidden');
+            }
+
+            async function processNextChunk() {
+                if (!isProcessingChunks || isPaused) {
+                    if (!isProcessingChunks) {
+                         chunkControls.classList.add('hidden');
+                    }
+                    return;
+                }
+
+                if (currentChunkIndex >= processingQueue.length) {
+                    chunkStatus.textContent = 'Hoàn thành!';
+                    setTimeout(stopChunkProcessing, 1000);
+                    return;
+                }
                 
-                outputDisplay.innerHTML = processedText;
+                chunkStatus.textContent = `Đang xử lý đoạn ${currentChunkIndex + 1} / ${processingQueue.length}...`;
+                const chunk = processingQueue[currentChunkIndex];
+                await currentProcessFunction(chunk, currentResultContainer, currentLoadingSpinner, true);
                 
-                // Thêm sự kiện click cho từng ký tự
-                document.querySelectorAll('.chinese-char').forEach(charElement => {
-                    charElement.addEventListener('click', async function() {
-                        const char = this.getAttribute('data-char');
-                        const charData = await lookupDictionary(char);
-                        showPopup(char, charData);
+                currentChunkIndex++;
+                processNextChunk();
+            }
+
+            function startChunkProcessing(button, section, resultContainer, loadingSpinner, processFunction) {
+                if (!currentRawText) return;
+                if (isProcessingChunks) {
+                    alert("Một tác vụ khác đang được xử lý. Vui lòng đợi hoặc dừng tác vụ hiện tại.");
+                    return;
+                }
+
+                section.classList.remove('hidden');
+                resultContainer.innerHTML = '';
+                
+                processingQueue = chunkText(currentRawText, 200);
+                currentChunkIndex = 0;
+                isProcessingChunks = true;
+                isPaused = false;
+                currentProcessFunction = processFunction;
+                currentResultContainer = resultContainer;
+                currentLoadingSpinner = loadingSpinner;
+                
+                processPauseResumeBtn.textContent = 'Tạm dừng';
+                chunkControls.classList.remove('hidden');
+
+                processNextChunk();
+            }
+            
+            pinyinButton.addEventListener('click', () => startChunkProcessing(pinyinButton, pinyinTextSection, pinyinContentDiv, pinyinLoadingSpinner, processPinyinChunk));
+            segmentTextButton.addEventListener('click', () => startChunkProcessing(segmentTextButton, segmentedTextSection, segmentedContentDiv, segmentLoadingSpinner, processSegmentationChunk));
+            explainTextButton.addEventListener('click', () => startChunkProcessing(explainTextButton, explanationSection, explanationContentDiv, explanationLoadingSpinner, processExplanationChunk));
+            translateFullTextButton.addEventListener('click', () => startChunkProcessing(translateFullTextButton, fullTranslationSection, fullTranslationContent, fullTranslationLoadingSpinner, processTranslationChunk));
+
+            processPauseResumeBtn.addEventListener('click', () => {
+                isPaused = !isPaused;
+                processPauseResumeBtn.textContent = isPaused ? 'Tiếp tục' : 'Tạm dừng';
+                if (!isPaused) {
+                    processNextChunk();
+                }
+            });
+
+            processStopBtn.addEventListener('click', stopChunkProcessing);
+
+
+            async function processPinyinChunk(chunk, container, spinner, append = false) {
+                 spinner.style.display = 'block';
+                 try {
+                    const prompt = `Cho đoạn văn bản tiếng Trung sau, hãy chuyển đổi nó thành một mảng các đối tượng JSON. Mỗi đối tượng đại diện cho một ký tự hoặc một dấu câu. Nếu là ký tự tiếng Trung, đối tượng phải có thuộc tính "char" và "pinyin". Nếu là dấu câu hoặc ký tự khác, đối tượng chỉ có thuộc tính "char". Ví dụ: '你好，世界！' -> [{"char": "你", "pinyin": "nǐ"}, {"char": "好", "pinyin": "hǎo"}, {"char": "，"}, {"char": "世", "pinyin": "shì"}, {"char": "界", "pinyin": "jiè"}, {"char": "！"}]. Đây là văn bản cần xử lý:\n\n${chunk}`;
+                    const schema = { type: "ARRAY", items: { type: "OBJECT", properties: { "char": { "type": "STRING" }, "pinyin": { "type": "STRING" } } } };
+                    const jsonString = await callAI(prompt, "application/json", schema);
+                    const pinyinData = JSON.parse(jsonString);
+
+                    pinyinData.forEach(item => {
+                        if (item.pinyin) {
+                            const ruby = document.createElement('ruby');
+                            ruby.className = 'word-clickable';
+                            ruby.textContent = item.char;
+                            const rt = document.createElement('rt');
+                            rt.textContent = item.pinyin;
+                            ruby.appendChild(rt);
+                            ruby.addEventListener('click', (event) => {
+                                event.stopPropagation();
+                                openLookupModal(item.char, event);
+                                aiCustomInput.value = item.char;
+                                if (autoPlayToggle.checked) {
+                                    speakWord(item.char);
+                                }
+                            });
+                            container.appendChild(ruby);
+                        } else {
+                            const span = document.createElement('span');
+                            span.textContent = item.char;
+                            container.appendChild(span);
+                        }
                     });
+                 } catch (error) {
+                    container.innerHTML += `<p class="text-red-600">Lỗi khi thêm Pinyin: ${error.message}.</p>`;
+                 } finally {
+                    spinner.style.display = 'none';
+                 }
+            }
+            
+            async function processSegmentationChunk(chunk, container, spinner, append = false) {
+                 spinner.style.display = 'block';
+                 try {
+                    const prompt = `Phân đoạn văn bản tiếng Trung sau thành các từ có nghĩa và dấu câu, kèm theo phiên âm pinyin cho mỗi từ. Trả về một mảng JSON các đối tượng, mỗi đối tượng có thuộc tính "word" và "pinyin". Đối với dấu câu, "pinyin" sẽ là một chuỗi rỗng. Ví dụ: '我爱北京天安门。' -> [{"word":"我","pinyin":"wǒ"},{"word":"爱","pinyin":"ài"},{"word":"北京","pinyin":"Běijīng"},{"word":"天安门","pinyin":"Tiān'ānmén"},{"word":"。","pinyin":""}]. Đây là văn bản cần xử lý:\n\n${chunk}`;
+                    const schema = { type: "ARRAY", items: { type: "OBJECT", properties: { "word": { "type": "STRING" }, "pinyin": { "type": "STRING" } }, required: ["word", "pinyin"] } };
+                    const jsonString = await callAI(prompt, "application/json", schema);
+                    const segments = JSON.parse(jsonString);
+
+                    segments.forEach(seg => {
+                        if (seg.word.match(/[\u4e00-\u9fa5]/)) {
+                            const ruby = document.createElement('ruby');
+                            ruby.className = 'segmented-word';
+                            ruby.textContent = seg.word;
+                            const rt = document.createElement('rt');
+                            rt.textContent = seg.pinyin;
+                            ruby.appendChild(rt);
+                            ruby.addEventListener('click', (event) => {
+                                event.stopPropagation();
+                                openLookupModal(seg.word, event);
+                                aiCustomInput.value = seg.word;
+                                if (autoPlayToggle.checked) {
+                                    speakWord(seg.word);
+                                }
+                            });
+                            container.appendChild(ruby);
+                        } else {
+                            const span = document.createElement('span');
+                            span.textContent = seg.word;
+                            container.appendChild(span);
+                        }
+                    });
+                    container.appendChild(document.createTextNode(' '));
+                 } catch (error) {
+                    container.innerHTML += `<p class="text-red-600">Lỗi khi tách cụm từ: ${error.message}.</p>`;
+                 } finally {
+                    spinner.style.display = 'none';
+                 }
+            }
+            
+            async function processExplanationChunk(chunk, container, spinner, append = false) {
+                 spinner.style.display = 'block';
+                 try {
+                    const prompt = `Giải thích nội dung ngữ pháp tiếng Trung sau đây một cách chi tiết và dễ hiểu bằng tiếng Việt, dành cho người học tiếng Trung. Tập trung vào các khái niệm ngữ pháp, ví dụ và quy tắc được trình bày trong văn bản:\n\n${chunk}`;
+                    const explanation = await callAI(prompt, "text/plain");
+                    container.innerHTML += explanation.replace(/\n/g, '<br>') + '<hr class="my-4">';
+                 } catch (error) {
+                    container.innerHTML += `<p class="text-red-600">Lỗi khi gọi AI để giải thích: ${error.message}.</p>`;
+                 } finally {
+                    spinner.style.display = 'none';
+                 }
+            }
+            
+            async function processTranslationChunk(chunk, container, spinner, append = false) {
+                 spinner.style.display = 'block';
+                 try {
+                    const prompt = `Dịch đoạn văn bản tiếng Trung sau đây sang tiếng Việt. Chỉ trả về bản dịch, không thêm bất kỳ lời giải thích nào khác:\n\n${chunk}`;
+                    const translation = await callAI(prompt, "text/plain");
+                    container.innerText += translation + ' ';
+                 } catch (error) {
+                    container.innerHTML += `<p class="text-red-600">Lỗi khi dịch văn bản: ${error.message}.</p>`;
+                 } finally {
+                    spinner.style.display = 'none';
+                 }
+            }
+
+
+            fileUploadInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (!file) return;
+                fileNameSpan.textContent = file.name;
+                textInputArea.value = '';
+                textDisplay.textContent = 'Đang xử lý tệp tin...';
+                const reader = new FileReader();
+
+                if (file.name.endsWith('.docx')) {
+                    reader.onload = (e) => {
+                        window.mammoth.convertToHtml({ arrayBuffer: e.target.result })
+                            .then(result => processNewContent(result.value, true))
+                            .catch(error => {
+                                console.error("Error processing DOCX:", error);
+                                textDisplay.textContent = `Lỗi khi xử lý tệp DOCX: ${error.message}`;
+                            });
+                    };
+                    reader.readAsArrayBuffer(file);
+                } else { // Handle .txt files
+                    reader.onload = (e) => processNewContent(e.target.result, false);
+                    reader.readAsText(file);
+                }
+            });
+
+            processTextButton.addEventListener('click', () => {
+                const text = textInputArea.value.trim();
+                if (!text) {
+                    alert("Vui lòng nhập văn bản vào ô.");
+                    return;
+                }
+                fileUploadInput.value = '';
+                fileNameSpan.textContent = 'Văn bản đã nhập';
+                processNewContent(text, false);
+            });
+
+            // --- TTS Implementation ---
+            function updatePlayPauseUI() {
+                if (speechSynthesis.speaking && !speechSynthesis.paused) {
+                    playIcon.classList.add('hidden');
+                    pauseIcon.classList.remove('hidden');
+                    playPauseText.textContent = 'Tạm dừng';
+                } else {
+                    playIcon.classList.remove('hidden');
+                    pauseIcon.classList.add('hidden');
+                    playPauseText.textContent = 'Phát';
+                    if (!speechSynthesis.speaking) {
+                        ttsProgressBar.style.width = '0%';
+                    }
+                }
+            }
+
+            function populateVoiceList() {
+                voices = speechSynthesis.getVoices().filter(voice => voice.lang.startsWith('zh'));
+                ttsVoiceSelect.innerHTML = '';
+                if (voices.length === 0) {
+                    const option = document.createElement('option');
+                    option.textContent = 'Không có giọng đọc tiếng Trung';
+                    ttsVoiceSelect.appendChild(option);
+                    return;
+                }
+                voices.forEach(voice => {
+                    const option = document.createElement('option');
+                    option.textContent = `${voice.name} (${voice.lang})`;
+                    option.setAttribute('data-lang', voice.lang);
+                    option.setAttribute('data-name', voice.name);
+                    ttsVoiceSelect.appendChild(option);
                 });
-                
-                // Dịch văn bản
-                if (showTranslation) {
-                    const translation = await translateText(textInput);
-                    document.getElementById('translationBox').style.display = 'block';
-                    document.getElementById('translationContent').textContent = translation;
-                } else {
-                    document.getElementById('translationBox').style.display = 'none';
-                }
-                
-                // Giải thích ngữ pháp
-                if (showGrammar) {
-                    const grammar = await explainGrammar(textInput);
-                    document.getElementById('grammarExplanation').style.display = 'block';
-                    document.getElementById('grammarContent').innerHTML = grammar.replace(/\n/g, '<br>');
-                } else {
-                    document.getElementById('grammarExplanation').style.display = 'none';
-                }
-                
-            } catch (error) {
-                console.error("Lỗi khi xử lý văn bản:", error);
-                outputDisplay.innerHTML = "Đã xảy ra lỗi khi xử lý văn bản. Vui lòng thử lại!";
-            } finally {
-                // Ẩn chỉ báo đang xử lý
-                document.getElementById('processingIndicator').style.display = 'none';
             }
-        }
-        
-        // Hàm hiển thị popup từ điển
-        function showPopup(char, charData) {
-            const popup = document.getElementById('dictionaryPopup');
-            
-            document.getElementById('popupChar').textContent = char;
-            
-            // Phân tích dữ liệu từ DeepSeek API
-            const lines = charData.split('\n');
-            let pinyin = "?";
-            let meaning = "Không tìm thấy";
-            let radical = "?";
-            let strokes = "?";
-            let hsk = "?";
-            
-            for (const line of lines) {
-                if (line.includes("Pinyin:")) pinyin = line.split(":")[1].trim();
-                else if (line.includes("Nghĩa tiếng Việt:")) meaning = line.split(":")[1].trim();
-                else if (line.includes("Bộ thủ:")) radical = line.split(":")[1].trim();
-                else if (line.includes("Số nét:")) strokes = line.split(":")[1].trim();
-                else if (line.includes("Cấp độ HSK:")) hsk = line.split(":")[1].trim();
+
+            function speakWord(text) {
+                if (!text) return;
+                speechSynthesis.cancel(); 
+                const utterance = new SpeechSynthesisUtterance(text);
+                const selectedVoiceName = ttsVoiceSelect.selectedOptions[0]?.getAttribute('data-name');
+                utterance.voice = voices.find(voice => voice.name === selectedVoiceName);
+                utterance.rate = ttsRateSlider.value;
+                utterance.lang = 'zh-CN';
+                speechSynthesis.speak(utterance);
             }
-            
-            document.getElementById('popupPinyin').textContent = pinyin;
-            document.getElementById('popupMeaning').textContent = meaning;
-            document.getElementById('popupRadical').textContent = radical;
-            document.getElementById('popupStrokes').textContent = strokes;
-            document.getElementById('popupHsk').textContent = hsk;
-            
-            popup.style.display = 'block';
-        }
-        
-        function closePopup() {
-            document.getElementById('dictionaryPopup').style.display = 'none';
-        }
-        
-        // Hàm xử lý file DOCX
-        async function handleDocxUpload(file) {
-            try {
-                const arrayBuffer = await file.arrayBuffer();
-                const result = await mammoth.extractRawText({ arrayBuffer });
-                document.getElementById('textInput').value = result.value;
-                document.getElementById('fileName').textContent = `Đã tải lên: ${file.name}`;
-            } catch (error) {
-                console.error("Lỗi khi đọc file DOCX:", error);
-                alert("Đã xảy ra lỗi khi đọc file DOCX. Vui lòng thử lại!");
-            }
-        }
-        
-        // Sự kiện khi trang được tải
-        document.addEventListener('DOMContentLoaded', function() {
-            // Sự kiện nút xử lý
-            document.getElementById('processBtn').addEventListener('click', processText);
-            
-            // Sự kiện nút xóa
-            document.getElementById('clearBtn').addEventListener('click', function() {
-                document.getElementById('textInput').value = '';
-                document.getElementById('outputDisplay').innerHTML = '';
-                document.getElementById('grammarContent').textContent = '';
-                document.getElementById('translationContent').textContent = '';
-                document.getElementById('fileName').textContent = '';
-            });
-            
-            // Sự kiện khu vực tải lên
-            document.getElementById('uploadArea').addEventListener('click', function() {
-                document.getElementById('fileInput').click();
-            });
-            
-            // Sự kiện chọn file
-            document.getElementById('fileInput').addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file && file.name.endsWith('.docx')) {
-                    handleDocxUpload(file);
-                } else {
-                    alert("Vui lòng chọn file DOCX!");
-                }
-            });
-            
-            // Sự kiện kéo thả file
-            const uploadArea = document.getElementById('uploadArea');
-            uploadArea.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                uploadArea.style.background = '#ffebee';
-            });
-            
-            uploadArea.addEventListener('dragleave', function() {
-                uploadArea.style.background = '#fff9f9';
-            });
-            
-            uploadArea.addEventListener('drop', function(e) {
-                e.preventDefault();
-                uploadArea.style.background = '#fff9f9';
+
+            function speak(text, startIndex = 0) {
+                speechSynthesis.cancel();
+                speechStartIndex = startIndex;
+                const textToSpeak = text.substring(startIndex);
+                if (!textToSpeak) return;
+
+                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                const selectedVoiceName = ttsVoiceSelect.selectedOptions[0]?.getAttribute('data-name');
+                utterance.voice = voices.find(voice => voice.name === selectedVoiceName);
+                utterance.rate = ttsRateSlider.value;
+                utterance.lang = 'zh-CN';
+
+                utterance.onboundary = (event) => {
+                    const totalChars = currentRawText.length;
+                    const spokenChars = speechStartIndex + event.charIndex;
+                    const progress = totalChars > 0 ? (spokenChars / totalChars) * 100 : 0;
+                    ttsProgressBar.style.width = `${progress}%`;
+                };
+
+                utterance.onend = () => {
+                    ttsProgressBar.style.width = '0%';
+                    speechStartIndex = 0;
+                    updatePlayPauseUI();
+                };
+
+                utterance.onerror = (event) => {
+                    console.error('SpeechSynthesisUtterance.onerror', event);
+                    updatePlayPauseUI();
+                };
                 
-                const file = e.dataTransfer.files[0];
-                if (file && file.name.endsWith('.docx')) {
-                    handleDocxUpload(file);
+                speechSynthesis.speak(utterance);
+                setTimeout(updatePlayPauseUI, 50);
+            }
+
+            populateVoiceList();
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = populateVoiceList;
+            }
+
+            ttsPlayPauseBtn.addEventListener('click', () => {
+                if (!currentRawText) return;
+                if (speechSynthesis.speaking) {
+                    if (speechSynthesis.paused) {
+                        speechSynthesis.resume();
+                    } else {
+                        speechSynthesis.pause();
+                    }
                 } else {
-                    alert("Vui lòng kéo thả file DOCX!");
+                    speak(currentRawText, 0);
+                }
+                 setTimeout(updatePlayPauseUI, 50);
+            });
+
+            ttsStopBtn.addEventListener('click', () => {
+                speechSynthesis.cancel();
+                ttsProgressBar.style.width = '0%';
+                speechStartIndex = 0;
+                updatePlayPauseUI();
+            });
+
+            ttsRateSlider.addEventListener('input', (e) => {
+                const rate = parseFloat(e.target.value);
+                ttsRateLabel.textContent = `${rate.toFixed(1)}x`;
+                if (speechSynthesis.speaking && !speechSynthesis.paused) {
+                    const currentProgress = parseFloat(ttsProgressBar.style.width) || 0;
+                    const seekIndex = Math.floor((currentProgress / 100) * currentRawText.length);
+                    speak(currentRawText, seekIndex);
                 }
             });
             
-            // Sự kiện đóng popup
-            document.getElementById('closePopup').addEventListener('click', closePopup);
-            
-            // Sự kiện khi thay đổi tùy chọn
-            document.querySelectorAll('.option-item input').forEach(input => {
-                input.addEventListener('change', processText);
+            ttsProgressContainer.addEventListener('click', (e) => {
+                if (!currentRawText) return;
+                const rect = e.currentTarget.getBoundingClientRect();
+                const clickX = e.clientX - rect.left;
+                const width = e.currentTarget.offsetWidth;
+                const percentage = clickX / width;
+                
+                let seekIndex = Math.floor(percentage * currentRawText.length);
+                
+                const lastSpace = currentRawText.lastIndexOf(' ', seekIndex);
+                if (lastSpace !== -1) {
+                    seekIndex = lastSpace + 1;
+                }
+
+                speak(currentRawText, seekIndex);
             });
-        });
+
+
+            document.querySelectorAll('.toggle-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const content = e.target.closest('.section-header').nextElementSibling;
+                    content.classList.toggle('hidden');
+                    button.textContent = content.classList.contains('hidden') ? 'Hiển thị' : 'Thu gọn';
+                });
+            });
+            
+            function copyToClipboard(text) {
+                 const textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed";
+                textArea.style.top = "-9999px";
+                textArea.style.left = "-9999px";
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                     alert('Đã sao chép vào clipboard!');
+                } catch (err) {
+                    console.error('Lỗi khi sao chép: ', err);
+                }
+                document.body.removeChild(textArea);
+            }
+
+            document.querySelectorAll('.copy-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const content = e.target.closest('.section-header').nextElementSibling;
+                    copyToClipboard(content.innerText);
+                });
+            });
+
+            toggleMainTextButton.addEventListener('click', () => {
+                textDisplay.classList.toggle('hidden');
+                toggleMainTextButton.textContent = textDisplay.classList.contains('hidden') ? 'Hiển thị' : 'Thu gọn';
+            });
+            
+            copyMainTextButton.addEventListener('click', () => {
+                 copyToClipboard(currentRawText);
+            });
+
+            document.addEventListener('mouseup', (e) => {
+                setTimeout(() => {
+                    const selection = window.getSelection();
+                    if (!selection || selection.isCollapsed) {
+                        return;
+                    }
+
+                    const selectedText = selection.toString().trim();
+                    const targetIsPopup = selectionPopup.contains(e.target) || modalContentInner.contains(e.target);
+                    const targetIsWord = e.target.closest('.word-clickable');
+
+                    if (!selectedText || targetIsPopup || targetIsWord) {
+                        return;
+                    }
+
+                    lookupModalOverlay.style.display = 'none';
+                    selectionPopup.style.visibility = 'hidden';
+                    selectionPopup.classList.remove('hidden');
+                    
+                    const range = selection.getRangeAt(0);
+                    const rect = range.getBoundingClientRect();
+                    const popupWidth = selectionPopup.offsetWidth;
+                    const popupHeight = selectionPopup.offsetHeight;
+                    const margin = 10;
+                    let top = rect.bottom + window.scrollY + 5;
+                    let left = rect.left + window.scrollX + (rect.width / 2) - (popupWidth / 2);
+                    
+                    if (left + popupWidth > window.innerWidth - margin) left = window.innerWidth - popupWidth - margin;
+                    if (left < margin) left = margin;
+                    if (top + popupHeight > window.innerHeight + window.scrollY - margin) {
+                        top = rect.top + window.scrollY - popupHeight - 5;
+                    }
+                    if (top < window.scrollY + margin) top = window.scrollY + margin;
+
+                    selectionPopup.style.top = `${top}px`;
+                    selectionPopup.style.left = `${left}px`;
+                    selectionPopup.style.visibility = 'visible';
+                    
+                    copySelectionButton.onclick = () => {
+                        copyToClipboard(selectedText);
+                        selectionPopup.classList.add('hidden');
+                    };
+
+                    translateSelectionButton.onclick = async () => {
+                        selectionTranslateResultDiv.classList.add('hidden');
+                        selectionTranslateSpinner.style.display = 'block';
+                        const translation = await getTranslation(selectedText);
+                        selectionTranslateResultDiv.innerHTML = `<strong>Dịch:</strong> ${translation.pinyin} - ${translation.meaning}`;
+                        selectionTranslateResultDiv.classList.remove('hidden');
+                    };
+                    
+                    pronounceSelectionButton.onclick = () => {
+                        speakWord(selectedText);
+                    };
+
+                    hanziiSelectionLink.href = `https://hanzii.net/search/word/${encodeURIComponent(selectedText)}?hl=vi`;
+
+                    selectionTranslateResultDiv.classList.add('hidden');
+                    selectionTranslateSpinner.style.display = 'none';
+                }, 0);
+            });
+        }
+        
+        window.addEventListener('load', mainApp);
+
     </script>
 </body>
 </html>

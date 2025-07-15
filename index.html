@@ -41,16 +41,6 @@
             max-height: 70vh;
             overflow-y: auto;
             font-size: 1.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: #9ca3af;
-        }
-        .text-content.has-content {
-            align-items: flex-start;
-            text-align: left;
-            color: #333;
         }
         .word-clickable, .segmented-word ruby {
             cursor: pointer;
@@ -333,7 +323,8 @@
                 </div>
             </div>
             <div id="text-display" class="text-content">
-                Vui lòng tải lên một tệp tin .docx hoặc nhập văn bản để bắt đầu.
+                <!-- Text content will be loaded here -->
+                Vui lòng tải lên một tệp tin hoặc nhập văn bản để bắt đầu.
             </div>
         </div>
 
@@ -342,7 +333,7 @@
         <div id="text-stats-section" class="hidden">
              <h3 class="text-xl font-semibold mb-3 text-gray-800">Thống kê văn bản</h3>
              <p class="text-sm text-gray-600">Độ dài văn bản: <span id="char-count" class="font-bold">0</span> ký tự</p>
-             <p class="text-sm text-gray-600">Số đoạn (ước tính): <span id="word-count" class="font-bold">0</span> từ</p>
+             <p class="text-sm text-gray-600">Số đoạn (ước tính): <span id="word-count" class="font-bold">0</span> đoạn</p>
         </div>
 
         <!-- AI Generation Section -->
@@ -446,8 +437,13 @@
                 <li><a href="https://hanzii.net/" target="_blank">Hanzii.net</a> - Từ điển và công cụ học tiếng Trung toàn diện cho người Việt.</li>
                 <li><a href="https://hvdic.thivien.net/" target="_blank">Từ điển Hán Nôm</a> - Tra cứu Hán tự, Nôm và các từ điển liên quan.</li>
                 <li><a href="https://www.mdbg.net/chinese/dictionary" target="_blank">MDBG Chinese Dictionary</a> - Từ điển Trung-Anh trực tuyến miễn phí.</li>
-                <li><a href="https://www.archchinese.com/" target="_blank">Arch Chinese</a> - Công cụ học Hán tự và luyện viết.</li>
+                <li><a href="https://vtudien.com/trung-viet" target="_blank">Vtudien.com</a> - Từ điển đa ngôn ngữ.</li>
                 <li>* Web này được tặng cho <a href="https://www.facebook.com/kieuoanhdichi" target="_blank">Kiều Oanh</a> - Giáo viên tiếng Trung, du học sinh thạc sĩ tại Trung Quốc.</li>
+            </ul>
+        </div>
+
+
+
             </ul>
         </div>
 
@@ -487,7 +483,7 @@
     </div>
 
     <!-- External libraries moved to the end of body -->
-    <script src="https://cdn.jsdelivr.net/npm/docx-preview@0.1.15/dist/docx-preview.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.5.1/mammoth.browser.min.js"></script>
     
     <!-- Firebase SDK Compat libraries for global access -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
